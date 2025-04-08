@@ -11,18 +11,19 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UsuarioService {
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    public UsuarioRepository usuarioRepository;
 
     @Autowired
-    private JwtService jwtService;
+    public JwtService jwtService;
 
     @Autowired
-    private ModelMapper modelMapper;
+    public ModelMapper modelMapper;
 
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 

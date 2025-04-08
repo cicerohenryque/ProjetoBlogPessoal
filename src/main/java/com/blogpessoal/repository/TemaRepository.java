@@ -1,13 +1,13 @@
-package com.blogpessoal.repository;
+    package com.blogpessoal.repository;
 
-import com.blogpessoal.model.Tema;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+    import com.blogpessoal.model.Tema;
+    import org.springframework.data.jpa.repository.JpaRepository;
+    import org.springframework.stereotype.Repository;
 
-import java.util.List;
+    import java.util.List;
 
-@Repository
-public interface TemaRepository extends JpaRepository<Tema, Long> {
+    @Repository
+    public interface TemaRepository extends JpaRepository<Tema, Long> {
 
-    List<Tema> findAllByDescricaoContainingIgnoreCase(String descricao);
-}
+        List<Tema> findAllByDescricaoContainingIgnoreCase(String descricao);
+    }

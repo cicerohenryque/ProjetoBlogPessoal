@@ -55,6 +55,9 @@ public class Usuario {
         this.tipo = tipo;
     }
 
+    public Usuario(Object o, String maria, String mail, String senha123, Object o1) {
+    }
+
     public Long getId() {
         return id;
     }

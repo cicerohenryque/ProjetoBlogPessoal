@@ -19,6 +19,9 @@ public class TemaService {
     @Autowired
     private ModelMapper modelMapper;
 
+    public TemaService(TemaRepository temaRepository, ModelMapper modelMapper) {
+    }
+
     public List<TemaDTO> listarTemas() {
         return temaRepository.findAll()
                 .stream()
@@ -38,29 +41,29 @@ public class TemaService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<TemaDTO> criarTema(TemaDTO tema) {
-        Tema temas = new Tema();
-        TemaDTO temaDTO = null;
-        tema.setDescricao(temaDTO.getDescricao());
-        temaRepository.save(temas);
-        Object save = null;
-        return Optional.of(modelMapper.map(save, TemaDTO.class));
+    public Optional<TemaDTO> criarTema(TemaDTO temaDTO) {
+        Tema tema = modelMapper.map(temaDTO, Tema.class);
+        Tema salvo = temaRepository.save(tema);
+        return Optional.of(modelMapper.map(salvo, TemaDTO.class));
     }
 
-    public Optional<TemaDTO> atualizarTema(TemaDTO tema) {
-        if (!temaRepository.existsById(tema.getId()))
+    public Optional<TemaDTO> atualizarTema(TemaDTO temaDTO) {
+        if (!temaRepository.existsById(temaDTO.getId()))
             return Optional.empty();
 
-        Tema temas = new Tema();
-        TemaDTO temaDTO = null;
-        tema.setDescricao(temaDTO.getDescricao());
-        temaRepository.save(temas);
-        Object save = null;
-        Tema atualizado = temaRepository.save(temas);
+        Tema tema = modelMapper.map(temaDTO, Tema.class);
+        Tema atualizado = temaRepository.save(tema);
         return Optional.of(modelMapper.map(atualizado, TemaDTO.class));
     }
 
     public void deletarTema(Long id) {
         temaRepository.deleteById(id);
+    }
+
+    public List<TemaDTO> buscarTodos() {
+        return temaRepository.findAll()
+                .stream()
+                .map(tema -> modelMapper.map(tema, TemaDTO.class))
+                .collect(Collectors.toList());
     }
 }

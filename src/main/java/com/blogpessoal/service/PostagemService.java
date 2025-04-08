@@ -17,13 +17,13 @@ import java.util.stream.Collectors;
 public class PostagemService {
 
     @Autowired
-    private PostagemRepository postagemRepository;
+    public PostagemRepository postagemRepository;
 
     @Autowired
-    private UsuarioRepository usuarioRepository;
+    public UsuarioRepository usuarioRepository;
 
     @Autowired
-    private TemaRepository temaRepository;
+    public TemaRepository temaRepository;
 
     public List<PostagemDTO> listarTodasPostagens() {
         return postagemRepository.findAll()
@@ -92,8 +92,10 @@ public class PostagemService {
         dto.setTitulo(postagem.getTitulo());
         dto.setTexto(postagem.getTexto());
         dto.setData(postagem.getData());
-        dto.setId(postagem.getUsuario().getId());
-        dto.setId(postagem.getTema().getId());
+        dto.setNomeUsuario(postagem.getUsuario().getNome());
+        dto.setDescricaoTema(postagem.getTema().getDescricao());
+        dto.setUsuarioId(postagem.getUsuario().getId());
+        dto.setTemaId(postagem.getTema().getId());
         return dto;
     }
 
@@ -105,11 +107,11 @@ public class PostagemService {
         postagem.setData(dto.getData());
 
         Usuario usuario = new Usuario();
-        usuario.setId(dto.getId());
+        usuario.setId(dto.getUsuarioId());
         postagem.setUsuario(usuario);
 
         Tema tema = new Tema();
-        tema.setId(dto.getId());
+        tema.setId(dto.getTemaId());
         postagem.setTema(tema);
 
         return postagem;

@@ -1,5 +1,6 @@
 package com.blogpessoal.model;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -46,6 +47,9 @@ public class Postagem {
         this.titulo = titulo;
         this.texto = texto;
         this.data = data;
+    }
+
+    public Postagem(Object o, String titulo, String texto, LocalDate now, Usuario usuario, Tema tema) {
     }
 
     public Long getId() {
